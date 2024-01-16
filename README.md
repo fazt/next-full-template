@@ -1,8 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Next Full Template
+
+- Authentication with Email and Google
+- User Management
+- Recover Password
+- File Upload (local and remote)
+- Simple user roles
+- Dinamic Tables
+- Form Validation
+- Push Notifications
+- PWA
+- 
+
+### Stack
+
+- Typescript
+- Prisma
 
 ## Getting Started
 
-First, run the development server:
+to run the development server:
 
 ```bash
 npm run dev
