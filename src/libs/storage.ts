@@ -69,7 +69,9 @@ export function getStorageDriver(): StorageDriver {
 }
 
 export function getUploadDir() {
-  return path.resolve(process.env.UPLOAD_DIR || "uploads");
+  // turbopackIgnore: la carpeta es configurable y son datos de runtime; sin el
+  // comentario Turbopack incluiría todo el proyecto en el trazado del build.
+  return path.resolve(/*turbopackIgnore: true*/ process.cwd(), process.env.UPLOAD_DIR || "uploads");
 }
 
 // ─── Guardado ────────────────────────────────────────────────────────────
