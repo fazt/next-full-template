@@ -24,7 +24,8 @@ function urlBase64ToUint8Array(base64: string) {
 }
 
 export function PushNotifications({ publicKey }: { publicKey: string | null }) {
-  const supported = useSyncExternalStore(noopSubscribe, isPushSupported, () => false);
+  // null en el servidor: el soporte solo se conoce en el navegador
+  const supported = useSyncExternalStore<boolean | null>(noopSubscribe, isPushSupported, () => null);
   const [subscribed, setSubscribed] = useState<boolean | null>(null);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<Message | null>(null);
@@ -51,6 +52,14 @@ export function PushNotifications({ publicKey }: { publicKey: string | null }) {
         Las notificaciones push están desactivadas. Define <code>VAPID_PUBLIC_KEY</code> y{" "}
         <code>VAPID_PRIVATE_KEY</code> (genéralas con <code>npm run vapid</code>) y reinicia el servidor.
       </Alert>
+    );
+  }
+
+  if (supported === null) {
+    return (
+      <Button loading disabled>
+        Comprobando…
+      </Button>
     );
   }
 
