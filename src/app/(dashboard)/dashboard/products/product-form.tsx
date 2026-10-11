@@ -2,12 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormActions } from "@/components/form-actions";
+import { ImageUpload } from "@/components/image-upload";
 import { Field, fieldAria } from "@/components/ui/field";
 import { Alert } from "@/components/ui/feedback";
-import { Input, Select, Textarea } from "@/components/ui/input";
+import { Input, Label, Select, Textarea } from "@/components/ui/input";
 import { apiRequest, applyFieldErrors } from "@/libs/http";
 import { productSchema, type ProductInput } from "@/libs/validations/catalog";
 
@@ -32,6 +33,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
   const [error, setError] = useState<string | null>(null);
   const {
     register,
+    control,
     handleSubmit,
     setError: setFieldError,
     formState: { errors, isSubmitting },
@@ -108,19 +110,21 @@ export function ProductForm({ product, categories }: ProductFormProps) {
         </Select>
       </Field>
 
-      <Field
-        label="URL de la imagen"
-        htmlFor="imageUrl"
-        error={errors.imageUrl?.message}
-        hint="Opcional. URL absoluta (https://…)."
-      >
-        <Input
-          type="url"
-          placeholder="https://"
-          {...fieldAria("imageUrl", errors.imageUrl?.message)}
-          {...register("imageUrl")}
+      <div className="grid gap-1.5">
+        <Label>Imagen</Label>
+        <Controller
+          control={control}
+          name="imageUrl"
+          render={({ field }) => (
+            <ImageUpload
+              value={field.value}
+              onChange={(url) => field.onChange(url)}
+              folder="products"
+              error={errors.imageUrl?.message}
+            />
+          )}
         />
-      </Field>
+      </div>
 
       <FormActions
         cancelHref="/dashboard/products"
