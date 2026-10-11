@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ServiceWorkerRegister } from "@/components/pwa/service-worker-register";
 import { ThemeScript } from "@/components/theme-script";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
@@ -41,6 +42,7 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-dvh font-sans`}>
         {children}
+        <ServiceWorkerRegister />
       </body>
     </html>
   );
