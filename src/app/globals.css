@@ -1,1 +1,91 @@
 @import "tailwindcss";
+
+/* Modo oscuro por clase (.dark en <html>), controlado por el selector de tema */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: oklch(0.985 0.002 265);
+  --foreground: oklch(0.21 0.02 265);
+  --card: oklch(1 0 0);
+  --muted: oklch(0.965 0.004 265);
+  --muted-foreground: oklch(0.52 0.02 265);
+  --border: oklch(0.92 0.006 265);
+  --input: oklch(0.87 0.01 265);
+  --primary: oklch(0.51 0.23 277);
+  --primary-hover: oklch(0.46 0.22 277);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent: oklch(0.955 0.025 277);
+  --accent-foreground: oklch(0.42 0.18 277);
+  --danger: oklch(0.577 0.215 27);
+  --danger-soft: oklch(0.96 0.03 27);
+  --success: oklch(0.56 0.14 155);
+  --success-soft: oklch(0.96 0.04 155);
+  --warning: oklch(0.6 0.13 75);
+  --warning-soft: oklch(0.97 0.05 90);
+  --ring: oklch(0.51 0.23 277 / 0.4);
+  color-scheme: light;
+}
+
+.dark {
+  --background: oklch(0.155 0.01 265);
+  --foreground: oklch(0.96 0.005 265);
+  --card: oklch(0.2 0.012 265);
+  --muted: oklch(0.235 0.012 265);
+  --muted-foreground: oklch(0.7 0.015 265);
+  --border: oklch(0.285 0.012 265);
+  --input: oklch(0.36 0.014 265);
+  --primary: oklch(0.63 0.19 277);
+  --primary-hover: oklch(0.68 0.17 277);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent: oklch(0.27 0.06 277);
+  --accent-foreground: oklch(0.86 0.08 277);
+  --danger: oklch(0.66 0.2 25);
+  --danger-soft: oklch(0.27 0.06 25);
+  --success: oklch(0.72 0.15 155);
+  --success-soft: oklch(0.26 0.05 155);
+  --warning: oklch(0.8 0.13 85);
+  --warning-soft: oklch(0.28 0.05 85);
+  --ring: oklch(0.63 0.19 277 / 0.45);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
